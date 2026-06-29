@@ -4,6 +4,5 @@ langchain-community
 langchain-core
 streamlit
 beautifulsoup4
-google-search-results
 python-dotenv
 requests
