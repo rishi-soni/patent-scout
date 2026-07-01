@@ -28,7 +28,11 @@ def parse_patent(url: str) -> str:
         title = title.get_text(strip=True) if title else "Unknown Title"
 
         abstract = soup.find(class_="abstract")
-        abstract = abstract.get_text(strip=True)[:1000] if abstract else "No abstract found"
+        # abstract = abstract.get_text(strip=True)[:1000] if abstract else "No abstract found"
+        abstract = abstract.get_text(strip=True) if abstract else "No abstract found"
+
+        # description = soup.find(class_="description")
+        # description = description.get_text(strip=True) if description else "No description found"
 
         claims = []
         claims_section = soup.find(class_="claims")
@@ -36,12 +40,18 @@ def parse_patent(url: str) -> str:
             for c in claims_section.find_all("div", class_="claim")[:5]:
                 claims.append(c.get_text(strip=True)[:300])
 
-        return json.dumps({
+        res = json.dumps({
             "title": title,
             "abstract": abstract,
             "claims": claims,
+            # "description": description,
             "url": url
         }, indent=2)
+
+        # data = json.loads(res)
+        # with open("output_pretty.json", "w") as file:
+        #     json.dump(data, file, indent=4)
+        return res
 
     except Exception as e:
         print(f"Parse error for {url}: {e} — using mock")
