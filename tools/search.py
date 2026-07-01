@@ -6,7 +6,7 @@ from langchain.tools import tool
 
 load_dotenv(find_dotenv())
 
-SERPAPI_URL = "https://serpapi.com/search"
+SERPAPI_URL = "https://serpapi.com/searchdddddd"
 
 
 @tool
@@ -43,7 +43,8 @@ def search_patents(query: str) -> str:
             patent_id = p.get("patent_id", "")
             results.append({
                 "title": p.get("title", "Unknown"),
-                "url": p.get("pdf", f"https://patents.google.com/patent/{patent_id.replace('-', '')}"),
+                # "url": p.get("pdf", f"https://patents.google.com/patent/{patent_id.replace('-', '')}"),
+                "url": p.get("patent_link", f"https://patents.google.com/patent/{patent_id.replace('-', '')}"),
                 "patent_number": patent_id,
                 "assignee": p.get("assignee", "Unknown"),
                 "filing_date": p.get("filing_date", "Unknown"),
@@ -60,44 +61,52 @@ def search_patents(query: str) -> str:
 def _mock_results() -> str:
     """Fallback mock data if the API is unreachable or key is missing."""
     return json.dumps([
+        # {
+        #     "title": "AI-Assisted Protein Folding for Drug Target Identification",
+        #     "url": "https://patents.google.com/patent/US11462304B2/en",
+        #     "patent_number": "US-11111111-B2",
+        #     "assignee": "DeepMind Technologies",
+        #     "filing_date": "2022-03-15",
+        #     "abstract": "A transformer-based method to predict 3D protein structure for identifying drug binding sites."
+        # },
         {
-            "title": "AI-Assisted Protein Folding for Drug Target Identification",
-            "url": "https://patents.google.com/patent/US11111111",
-            "patent_number": "US-11111111-B2",
-            "assignee": "DeepMind Technologies",
-            "filing_date": "2022-03-15",
-            "abstract": "A transformer-based method to predict 3D protein structure for identifying drug binding sites."
-        },
-        {
-            "title": "Machine Learning System for Genomic Variant Classification",
-            "url": "https://patents.google.com/patent/US22222222",
-            "patent_number": "US-22222222-B2",
-            "assignee": "Illumina Inc",
-            "filing_date": "2021-07-20",
-            "abstract": "Deep learning for classifying genomic variants associated with hereditary diseases."
-        },
-        {
-            "title": "Reinforcement Learning for Novel Drug Molecule Generation",
-            "url": "https://patents.google.com/patent/US33333333",
-            "patent_number": "US-33333333-B2",
-            "assignee": "Insilico Medicine",
-            "filing_date": "2023-01-10",
-            "abstract": "RL agents generating novel molecular structures with desired pharmacological properties."
-        },
-        {
-            "title": "NLP System for Clinical Trial Data Extraction",
-            "url": "https://patents.google.com/patent/US44444444",
-            "patent_number": "US-44444444-B2",
-            "assignee": "IBM Watson Health",
-            "filing_date": "2020-09-05",
-            "abstract": "NLP pipeline for automated extraction of outcomes from clinical trial documents."
-        },
-        {
-            "title": "Convolutional Neural Network for Medical Image Diagnosis",
-            "url": "https://patents.google.com/patent/US55555555",
-            "patent_number": "US-55555555-B2",
-            "assignee": "Google Health",
-            "filing_date": "2021-11-30",
-            "abstract": "CNN architecture for detecting anomalies in radiology images including CT scans and MRIs."
-        },
+            "title": "Artificial intelligence engine architecture for generating candidate drugs",
+    "url": "https://patents.google.com/patent/US11462304B2/en",
+    "patent_number": "patent/US11462304B2/en",
+    "assignee": "Peptilogics, Inc.",
+    "filing_date": "2021-06-04",
+    "abstract": "No abstract available"
+        }
+        # {
+        #     "title": "Machine Learning System for Genomic Variant Classification",
+        #     "url": "https://patents.google.com/patent/US22222222",
+        #     "patent_number": "US-22222222-B2",
+        #     "assignee": "Illumina Inc",
+        #     "filing_date": "2021-07-20",
+        #     "abstract": "Deep learning for classifying genomic variants associated with hereditary diseases."
+        # },
+        # {
+        #     "title": "Reinforcement Learning for Novel Drug Molecule Generation",
+        #     "url": "https://patents.google.com/patent/US33333333",
+        #     "patent_number": "US-33333333-B2",
+        #     "assignee": "Insilico Medicine",
+        #     "filing_date": "2023-01-10",
+        #     "abstract": "RL agents generating novel molecular structures with desired pharmacological properties."
+        # },
+        # {
+        #     "title": "NLP System for Clinical Trial Data Extraction",
+        #     "url": "https://patents.google.com/patent/US44444444",
+        #     "patent_number": "US-44444444-B2",
+        #     "assignee": "IBM Watson Health",
+        #     "filing_date": "2020-09-05",
+        #     "abstract": "NLP pipeline for automated extraction of outcomes from clinical trial documents."
+        # },
+        # {
+        #     "title": "Convolutional Neural Network for Medical Image Diagnosis",
+        #     "url": "https://patents.google.com/patent/US55555555",
+        #     "patent_number": "US-55555555-B2",
+        #     "assignee": "Google Health",
+        #     "filing_date": "2021-11-30",
+        #     "abstract": "CNN architecture for detecting anomalies in radiology images including CT scans and MRIs."
+        # },
     ], indent=2)
