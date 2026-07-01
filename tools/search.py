@@ -6,7 +6,7 @@ from langchain.tools import tool
 
 load_dotenv(find_dotenv())
 
-SERPAPI_URL = "https://serpapi.com/searchdddddd"
+SERPAPI_URL = "https://serpapi.com/search"
 
 
 @tool
